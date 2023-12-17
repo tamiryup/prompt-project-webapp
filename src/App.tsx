@@ -40,6 +40,7 @@ function App() {
         {inputsArray.map((input: string, index) => {
           return (
             <ChatBlock 
+              key={index}
               sessionId={sessionId}
               input={input}
             />
