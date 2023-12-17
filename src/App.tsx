@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import { ChatBlock } from './components/chatblock';
 
 function App() {
   const [sessionId, setSessionId] = useState("");
@@ -35,6 +36,17 @@ function App() {
 
   return (
     <>
+      <div className="chat-container">
+        {inputsArray.map((input: string, index) => {
+          return (
+            <ChatBlock 
+              sessionId={sessionId}
+              input={input}
+            />
+          )
+        })}
+      </div>
+
       <div className="input-container">
         input:
         <input 
