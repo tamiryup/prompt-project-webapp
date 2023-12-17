@@ -1,25 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 function App() {
+  const [sessionId, setSessionId] = useState("");
+  const [input, setInput] = useState("");
+  const [inputsArray, setInputsArray] = useState<string[]>([]);
+
+  const addInput = (newInput: string) => {
+    setInputsArray([...inputsArray, newInput]);
+  }
+
+  useEffect(() => {
+    const fetchSession = async () => {
+      try {
+        const result = await axios.get("http://localhost:8000/new-conversation");
+        setSessionId(result.data);
+        console.log(sessionId);
+      } catch (error) {
+        console.log(error);
+        alert("There was an error starting session");
+      }
+    };
+
+    fetchSession()
+    
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="input-container">
+        input:
+        <input 
+          type="text"
+          placeholder="Your input"
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
+        ></input>
+      </div>
+    </>
   );
 }
 
