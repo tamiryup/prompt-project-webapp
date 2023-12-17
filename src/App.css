@@ -6,6 +6,10 @@ input {
   outline: none;
 }
 
+button.submit-button {
+  height: 50px;
+}
+
 .input-container {
   position: fixed;
   width: 100%;

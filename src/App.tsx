@@ -12,6 +12,11 @@ function App() {
     setInputsArray([...inputsArray, newInput]);
   }
 
+  const onSubmit = () => {
+    addInput(input);
+    setInput("");
+  };
+
   useEffect(() => {
     const fetchSession = async () => {
       try {
@@ -38,6 +43,7 @@ function App() {
           value={input}
           onChange={(event) => setInput(event.target.value)}
         ></input>
+        <button className="submit-button" onClick={onSubmit}>Submit</button>
       </div>
     </>
   );
